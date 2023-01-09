@@ -6,6 +6,8 @@ import com.imooc.mall.common.Constant;
 import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
 import com.imooc.mall.model.pojo.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -20,18 +22,20 @@ import javax.servlet.http.HttpSession;
  * 描述：   用户控制器
  */
 @Controller
+@Api(tags = "用户控制器")
 public class UserController {
 
     @Autowired
     UserSerivce userSerivce;
 
+    @ApiOperation("test")
     @GetMapping("/test")
     @ResponseBody
     public User personalPage() {
         return userSerivce.getUser();
     }
 
-    //注册
+    @ApiOperation("注册")
     @PostMapping("/register")
     @ResponseBody
     public ApiRestResponse register(@RequestParam("userName") String userName, @RequestParam("password") String password) throws ImoocMallException {
@@ -52,7 +56,7 @@ public class UserController {
     }
 
 
-    //登录
+    @ApiOperation("登录")
     @PostMapping("/login")
     @ResponseBody
     public ApiRestResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
@@ -71,7 +75,7 @@ public class UserController {
         return ApiRestResponse.success(user);
     }
 
-    //更新个性签名
+    @ApiOperation("更新个性签名")
     @PostMapping("/user/update")
     @ResponseBody
     public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam String singnature) throws ImoocMallException {
@@ -88,7 +92,7 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
-    //登出，清除session
+    @ApiOperation("登出，清除session")
     @PostMapping("/user/logout")
     @ResponseBody
     public ApiRestResponse logout(HttpSession session) {
@@ -96,7 +100,7 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
-    //管理员登录接口
+    @ApiOperation("管理员登录接口")
     @PostMapping("/adminLogin")
     @ResponseBody
     public ApiRestResponse adminLogin(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {

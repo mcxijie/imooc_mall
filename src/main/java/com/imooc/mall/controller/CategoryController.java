@@ -7,6 +7,7 @@ import com.imooc.mall.common.Constant;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
 import com.imooc.mall.model.pojo.User;
 import com.imooc.mall.model.request.AddCategoryReq;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
  * 描述：   目录Controller
  */
 @Controller
+@Api(tags = "分类目录")
 public class CategoryController {
 
     @Autowired
@@ -29,7 +31,6 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    //后台添加目录
     @ApiOperation("后台添加目录")
     @PostMapping("admin/category/add")
     @ResponseBody
