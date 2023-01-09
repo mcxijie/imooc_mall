@@ -20,4 +20,14 @@ public class UserSerivceImpl implements UserSerivce {
     public User getUser() {
         return userMapper.selectByPrimaryKey(1);
     }
+
+    @Override
+    public void register(String userName, String password) {
+        //查询用户名是否存在，不允许重名
+        User result = userMapper.selectByName(userName);
+
+//        if (result != null){
+//            throw
+//        }
+    }
 }
