@@ -1,5 +1,7 @@
 package com.imooc.mall.model.request;
 
+import lombok.Data;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -7,6 +9,7 @@ import javax.validation.constraints.Size;
 /**
  * 描述：   UpdateCategoryReq
  */
+@Data
 public class UpdateCategoryReq {
 
     @NotNull(message = "id不能为null")
@@ -25,43 +28,4 @@ public class UpdateCategoryReq {
 
     private Integer orderNum;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
