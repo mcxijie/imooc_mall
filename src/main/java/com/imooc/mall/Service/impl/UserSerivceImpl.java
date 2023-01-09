@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *描述：   UserSerivce实现类
+ * 描述：   UserSerivce实现类
  */
 @Service
 public class UserSerivceImpl implements UserSerivce {
@@ -58,10 +58,26 @@ public class UserSerivceImpl implements UserSerivce {
             e.printStackTrace();
         }
 
-        User user = userMapper.selectLogin(userName, password);
+        User user = userMapper.selectLogin(userName, md5Password);
         if (user == null) {
             throw new ImoocMallException(ImoocMallExceptionEnum.WRONG_PASSWORD);
         }
         return user;
+    }
+
+    @Override
+    public void updateInformation(User user) throws ImoocMallException {
+        //更新个性签名
+        int updateCount = userMapper.updateByPrimaryKeySelective(user);
+        if (updateCount > 1) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.UPDATE_FAILE);
+        }
+
+    }
+
+    @Override
+    public boolean checkAdminRole(User user) {
+        //角色，1-普通用户，2-管理员
+        return user.getRole().equals(2);
     }
 }

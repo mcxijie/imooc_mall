@@ -31,6 +31,7 @@ public class UserController {
         return userSerivce.getUser();
     }
 
+    //注册
     @PostMapping("/register")
     @ResponseBody
     public ApiRestResponse register(@RequestParam("userName") String userName, @RequestParam("password") String password) throws ImoocMallException {
@@ -51,6 +52,7 @@ public class UserController {
     }
 
 
+    //登录
     @PostMapping("/login")
     @ResponseBody
     public ApiRestResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
@@ -67,5 +69,54 @@ public class UserController {
         user.setPassword(null);
         session.setAttribute(Constant.IMOOC_MALL_USER, user);
         return ApiRestResponse.success(user);
+    }
+
+    //更新个性签名
+    @PostMapping("/user/update")
+    @ResponseBody
+    public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam String singnature) throws ImoocMallException {
+        User currentUser = (User) session.getAttribute(Constant.IMOOC_MALL_USER);
+
+        if (currentUser == null) {
+            return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_LOGIN);
+        }
+
+        User user = new User();
+        user.setId(currentUser.getId());
+        user.setPersonalizedSignature(singnature);
+        userSerivce.updateInformation(user);
+        return ApiRestResponse.success();
+    }
+
+    //登出，清除session
+    @PostMapping("/user/logout")
+    @ResponseBody
+    public ApiRestResponse logout(HttpSession session) {
+        session.removeAttribute(Constant.IMOOC_MALL_USER);
+        return ApiRestResponse.success();
+    }
+
+    //管理员登录接口
+    @PostMapping("/adminLogin")
+    @ResponseBody
+    public ApiRestResponse adminLogin(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
+        if (StringUtils.isEmpty(userName)) {
+            return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_USER_NAME);
+        }
+
+        if (StringUtils.isEmpty(password)) {
+            return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_PASSWORD_NAME);
+        }
+
+        User user = userSerivce.login(userName, password);
+        //校验是否是管理严
+        if (userSerivce.checkAdminRole(user)) {
+            //是管理员
+            user.setPassword(null);
+            session.setAttribute(Constant.IMOOC_MALL_USER, user);
+            return ApiRestResponse.success(user);
+        } else {
+            return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_ADMIN);
+        }
     }
 }

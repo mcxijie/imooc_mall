@@ -11,6 +11,9 @@ public enum ImoocMallExceptionEnum {
     NAME_EXISTED(10004, "不允许重名，注册失败"),
     INSERT_FAILD(10005, "插入失败，请重试"),
     WRONG_PASSWORD(10006, "密码错误"),
+    NEED_LOGIN(10007, "用户未登录"),
+    UPDATE_FAILE(10008, "更新失败"),
+    NEED_ADMIN(10009, "无管理员权限"),
     SYSTEM_ERROR(20000, "系统异常");
 
 
