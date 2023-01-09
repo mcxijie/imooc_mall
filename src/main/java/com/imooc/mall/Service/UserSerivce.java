@@ -10,4 +10,6 @@ public interface UserSerivce {
     User getUser();
 
     void register(String userName, String password) throws ImoocMallException;
+
+    User login(String userName, String password) throws ImoocMallException;
 }
