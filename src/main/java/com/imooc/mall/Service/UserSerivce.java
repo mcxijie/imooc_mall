@@ -1,5 +1,6 @@
 package com.imooc.mall.Service;
 
+import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.model.pojo.User;
 
 /**
@@ -8,5 +9,5 @@ import com.imooc.mall.model.pojo.User;
 public interface UserSerivce {
     User getUser();
 
-    void register(String userName, String password);
+    void register(String userName, String password) throws ImoocMallException;
 }

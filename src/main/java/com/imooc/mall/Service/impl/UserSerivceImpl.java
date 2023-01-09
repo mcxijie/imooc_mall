@@ -2,6 +2,8 @@ package com.imooc.mall.Service.impl;
 
 
 import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.exception.ImoocMallException;
+import com.imooc.mall.exception.ImoocMallExceptionEnum;
 import com.imooc.mall.model.dao.UserMapper;
 import com.imooc.mall.model.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,21 @@ public class UserSerivceImpl implements UserSerivce {
     }
 
     @Override
-    public void register(String userName, String password) {
+    public void register(String userName, String password) throws ImoocMallException {
         //查询用户名是否存在，不允许重名
         User result = userMapper.selectByName(userName);
 
-//        if (result != null){
-//            throw
-//        }
+        if (result != null) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.NAME_EXISTED);
+        }
+
+        //写到数据库
+        User user = new User();
+        user.setUsername(userName);
+        user.setPassword(password);
+        int count = userMapper.insertSelective(user);
+        if (count == 0) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.INSERT_FAILD);
+        }
     }
 }
