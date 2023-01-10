@@ -1,5 +1,7 @@
 package com.imooc.mall.Service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imooc.mall.Service.CategoryService;
 import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
@@ -9,6 +11,8 @@ import com.imooc.mall.model.request.AddCategoryReq;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 描述：   分类目录Service实现类
@@ -48,5 +52,29 @@ public class CategoryServiceImpl implements CategoryService {
         if (count == 0) {
             throw new ImoocMallException(ImoocMallExceptionEnum.UPDATE_FAILE);
         }
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Category categoryOld = categoryMapper.selectByPrimaryKey(id);
+
+        //查不到记录，无法删除，删除失败
+        if (categoryOld == null) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.DELETE_FAILE);
+        }
+
+        int count = categoryMapper.deleteByPrimaryKey(id);
+        if (count == 0) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.DELETE_FAILE);
+        }
+    }
+
+    @Override
+    public PageInfo listForAdmin(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize, "type,order_num");
+        List<Category> categoryList = categoryMapper.selectList();
+        PageInfo pageInfo = new PageInfo(categoryList);
+        return pageInfo;
+
     }
 }
