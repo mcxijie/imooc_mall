@@ -17,8 +17,8 @@ public interface CategoryService {
 
     void delete(Integer id);
 
-    PageInfo listForAdmin(Integer pageNum, Integer pageSize);
+    PageInfo listCategoryForAdmin(Integer pageNum, Integer pageSize);
 
-    List<CategoryVO> listForCustomer();
+    List<CategoryVO> listCategoryForCustomer();
 
 }

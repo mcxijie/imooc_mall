@@ -2,12 +2,13 @@ package com.imooc.mall.model.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-public class CategoryVO {
+public class CategoryVO implements Serializable {
     private Integer id;
 
     private String name;

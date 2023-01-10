@@ -11,6 +11,7 @@ import com.imooc.mall.model.request.AddCategoryReq;
 import com.imooc.mall.model.vo.CategoryVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -73,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public PageInfo listForAdmin(Integer pageNum, Integer pageSize) {
+    public PageInfo listCategoryForAdmin(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize, "type,order_num");
         List<Category> categoryList = categoryMapper.selectList();
         PageInfo pageInfo = new PageInfo(categoryList);
@@ -82,7 +83,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryVO> listForCustomer() {
+    @Cacheable(value = "listCategoryForCustomer")
+    public List<CategoryVO> listCategoryForCustomer() {
         ArrayList<CategoryVO> categoryVOArrayList = new ArrayList<>();
         recursivelyFindCategoried(categoryVOArrayList, 0);
         return categoryVOArrayList;
