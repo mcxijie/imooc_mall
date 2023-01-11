@@ -1,6 +1,7 @@
 package com.imooc.mall.model.dao;
 
 import com.imooc.mall.model.pojo.Product;
+import com.imooc.mall.model.query.ProductListQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,5 @@ public interface ProductMapper {
 
     List<Product> selectListForAdmin();
 
+    List<Product> selectList(@Param("query") ProductListQuery productListQuery);
 }
