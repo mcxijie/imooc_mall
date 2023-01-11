@@ -1,5 +1,6 @@
 package com.imooc.mall.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.imooc.mall.Service.ProductService;
 import com.imooc.mall.common.ApiRestResponse;
 import com.imooc.mall.common.Constant;
@@ -91,7 +92,6 @@ public class ProductAdminController {
 
     @ApiOperation("后台删除商品")
     @PostMapping("admin/product/delete")
-    @ResponseBody
     public ApiRestResponse deleteProduct(@RequestParam Integer id) {
         productService.delete(id);
         return ApiRestResponse.success();
@@ -99,10 +99,16 @@ public class ProductAdminController {
 
     @ApiOperation("后台批量上下架商品")
     @PostMapping("admin/product/batchUpdateSellStatus")
-    @ResponseBody
     public ApiRestResponse batchUpdateSellStatus(@RequestParam Integer[] ids, @RequestParam Integer sellStatus) {
         productService.batchUpdateSellStatus(ids, sellStatus);
         return ApiRestResponse.success();
+    }
+
+    @ApiOperation("后台商品列表")
+    @PostMapping("admin/product/list")
+    public ApiRestResponse list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
+        return ApiRestResponse.success(pageInfo);
     }
 
 }
