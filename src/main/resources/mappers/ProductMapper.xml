@@ -145,15 +145,23 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.imooc.mall.model.pojo.Product">
     update imooc_mall_product
-    set `name` = #{name,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      detail = #{detail,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
-      stock = #{stock,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    set `name`      = #{name,jdbcType=VARCHAR},
+        image       = #{image,jdbcType=VARCHAR},
+        detail      = #{detail,jdbcType=VARCHAR},
+        category_id = #{categoryId,jdbcType=INTEGER},
+        price       = #{price,jdbcType=INTEGER},
+        stock       = #{stock,jdbcType=INTEGER},
+        `status`    = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="batchUpdateSellStatus">
+    update imooc_mall_product
+    set status = #{sellStatus}
+    where id in
+    <foreach collection="ids" close=")" item="id" open="(" separator=",">
+      #{id}
+    </foreach>
   </update>
 </mapper>
