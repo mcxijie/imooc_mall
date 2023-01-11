@@ -7,8 +7,8 @@
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
       <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
-      <ThresholdFilter level="info" onMatch="ACCEPT"
-        onMismatch="DENY"/>
+      <ThresholdFilter level="debug" onMatch="ACCEPT"
+                       onMismatch="DENY"/>
       <PatternLayout
         pattern="[%d{MM:dd HH:mm:ss.SSS}] [%level] [%logger{36}] - %msg%n"/>
     </Console>

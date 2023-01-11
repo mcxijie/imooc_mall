@@ -25,4 +25,5 @@ public interface CartMapper {
 
     List<CartVO> selectList(Integer userId);
 
+    Integer selectOrNot(@Param("userId") Integer userId, @Param("productId") Integer productId, @Param("selected") Integer selected);
 }
