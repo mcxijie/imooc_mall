@@ -106,7 +106,7 @@ public class ProductAdminController {
 
     @ApiOperation("后台商品列表")
     @PostMapping("admin/product/list")
-    public ApiRestResponse list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public ApiRestResponse<PageInfo> list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
     }

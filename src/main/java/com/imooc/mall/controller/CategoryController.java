@@ -64,7 +64,7 @@ public class CategoryController {
     @ApiOperation("后台查询目录")
     @PostMapping("admin/category/list")
     @ResponseBody
-    public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public ApiRestResponse<PageInfo> listCategoryForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = categoryService.listCategoryForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
     }
@@ -72,7 +72,7 @@ public class CategoryController {
     @ApiOperation("前台查询目录")
     @PostMapping("category/list")
     @ResponseBody
-    public ApiRestResponse listCategoryForCustomer() {
+    public ApiRestResponse<List<CategoryVO>> listCategoryForCustomer() {
         List<CategoryVO> categoryVOS = categoryService.listCategoryForCustomer(0);
         return ApiRestResponse.success(categoryVOS);
     }

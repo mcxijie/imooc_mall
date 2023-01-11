@@ -59,7 +59,7 @@ public class UserController {
     @ApiOperation("登录")
     @PostMapping("/login")
     @ResponseBody
-    public ApiRestResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
+    public ApiRestResponse<User> login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
         if (StringUtils.isEmpty(userName)) {
             return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_USER_NAME);
         }
@@ -103,7 +103,7 @@ public class UserController {
     @ApiOperation("管理员登录接口")
     @PostMapping("/adminLogin")
     @ResponseBody
-    public ApiRestResponse adminLogin(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
+    public ApiRestResponse<User> adminLogin(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) throws ImoocMallException {
         if (StringUtils.isEmpty(userName)) {
             return ApiRestResponse.error(ImoocMallExceptionEnum.NEED_USER_NAME);
         }

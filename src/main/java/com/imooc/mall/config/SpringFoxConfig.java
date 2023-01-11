@@ -23,6 +23,7 @@ public class SpringFoxConfig {
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.imooc.mall.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .ignoredParameterTypes(HttpSession.class)

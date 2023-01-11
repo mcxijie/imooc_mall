@@ -24,14 +24,14 @@ public class ProducController {
 
     @ApiOperation("前台商品详情")
     @GetMapping("product/detail")
-    public ApiRestResponse detail(@RequestParam Integer id) {
+    public ApiRestResponse<Product> detail(@RequestParam Integer id) {
         Product product = productService.detail(id);
         return ApiRestResponse.success(product);
     }
 
     @ApiOperation("前台商品列表")
     @GetMapping("product/list")
-    public ApiRestResponse list(ProductListReq productListReq) {
+    public ApiRestResponse<PageInfo> list(ProductListReq productListReq) {
         PageInfo pageInfo = productService.list(productListReq);
         return ApiRestResponse.success(pageInfo);
     }

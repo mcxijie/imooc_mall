@@ -1,12 +1,16 @@
 package com.imooc.mall.common;
 
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
+import io.swagger.annotations.ApiModelProperty;
 
 public class ApiRestResponse<T> {
+    @ApiModelProperty("响应编码")
     private Integer status;
 
+    @ApiModelProperty("响应消息")
     private String msg;
 
+    @ApiModelProperty("响应结果")
     private T data;
 
     private static final int OK_CODE = 10000;
