@@ -1,5 +1,6 @@
 package com.imooc.mall.Service;
 
+import com.imooc.mall.model.pojo.Product;
 import com.imooc.mall.model.request.AddProductReq;
 
 /**
@@ -10,4 +11,7 @@ public interface ProductService {
 
     void add(AddProductReq addProductReq);
 
+    void update(Product updateProduct);
+
+    void delete(Integer id);
 }
