@@ -12,4 +12,6 @@ public interface CartService {
 
     List<CartVO> add(Integer userId, Integer productId, Integer count);
 
+    List<CartVO> list(Integer userId);
+
 }

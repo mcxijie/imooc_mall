@@ -26,8 +26,11 @@ public class CartVO {
     @ApiModelProperty(value = "价格,单位-分")
     private Integer price;
 
+    @ApiModelProperty(value = "总价")
+    private Integer totalPrice;
+
     @ApiModelProperty(value = "商品名称")
-    private Integer productName;
+    private String productName;
 
     @ApiModelProperty(value = "产品图片,相对路径地址")
     private String ProductImg;
