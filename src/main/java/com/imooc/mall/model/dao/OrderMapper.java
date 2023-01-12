@@ -22,4 +22,7 @@ public interface OrderMapper {
     Order selectByOrderNo(String orderNo);
 
     List<Order> selectForCustmer(Integer userId);
+
+    List<Order> selectAllForAdmin();
+
 }
