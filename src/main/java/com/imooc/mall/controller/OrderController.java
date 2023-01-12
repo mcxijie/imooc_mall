@@ -55,4 +55,11 @@ public class OrderController {
         return ApiRestResponse.success(qrcode);
     }
 
+    @ApiOperation("订单支付")
+    @PostMapping("pay")
+    public ApiRestResponse pay(@RequestParam String orderNo) {
+        orderService.pay(orderNo);
+        return ApiRestResponse.success();
+    }
+
 }
