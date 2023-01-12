@@ -1,5 +1,7 @@
 package com.imooc.mall.Service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imooc.mall.Service.CartService;
 import com.imooc.mall.Service.OrderService;
 import com.imooc.mall.common.Constant;
@@ -135,6 +137,27 @@ public class OrderServiceImpl implements OrderService {
         }
         OrderVO orderVO = getOrderVO(order);
         return orderVO;
+    }
+
+    @Override
+    public PageInfo listForCustmer(Integer pageNum, Integer pageSize) {
+        Integer userId = UserFilter.currentUser.getId();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Order> orderList = orderMapper.selectForCustmer(userId);
+        List<OrderVO> orderVOList = orderListToOrderVOList(orderList);
+        PageInfo PageInfo = new PageInfo<>(orderList);
+        PageInfo.setList(orderVOList);
+        return PageInfo;
+    }
+
+    private List<OrderVO> orderListToOrderVOList(List<Order> orderList) {
+        List<OrderVO> orderVOList = new ArrayList<>();
+        for (int i = 0; i < orderList.size(); i++) {
+            Order order = orderList.get(i);
+            OrderVO orderVO = getOrderVO(order);
+            orderVOList.add(orderVO);
+        }
+        return orderVOList;
     }
 
     private OrderVO getOrderVO(Order order) {
