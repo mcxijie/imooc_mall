@@ -41,5 +41,11 @@ public class OrderController {
         return ApiRestResponse.success(pageInfo);
     }
 
+    @ApiOperation("前台取消订单")
+    @PostMapping("order/cancel")
+    public ApiRestResponse cancel(@RequestParam String orderNo) {
+        orderService.cancel(orderNo);
+        return ApiRestResponse.success();
+    }
 
 }
