@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.imooc.mall.Service.CartService;
 import com.imooc.mall.Service.OrderService;
+import com.imooc.mall.Service.UserSerivce;
 import com.imooc.mall.common.Constant;
 import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
@@ -57,6 +58,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderItemMapper orderItemMapper;
+
+    @Autowired
+    UserSerivce userSerivce;
 
     @Value("${file.upload.ip}")
     String ip;
@@ -299,6 +303,46 @@ public class OrderServiceImpl implements OrderService {
         if (order.getOrderStatus() == Constant.OrderStatusEnum.NOT_PAID.getCode()) {
             order.setOrderStatus(Constant.OrderStatusEnum.PAID.getCode());
             order.setPayTime(new Date());
+            orderMapper.updateByPrimaryKeySelective(order);
+        } else {
+            throw new ImoocMallException(ImoocMallExceptionEnum.WRONG_ORDER_STATUS);
+        }
+    }
+
+    @Override
+    public void delivered(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        //查不到订单报错
+        if (order == null) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.NO_ORDER);
+        }
+
+        if (order.getOrderStatus() == Constant.OrderStatusEnum.PAID.getCode()) {
+            order.setOrderStatus(Constant.OrderStatusEnum.DELIVERED.getCode());
+            order.setDeliveryTime(new Date());
+            orderMapper.updateByPrimaryKeySelective(order);
+        } else {
+            throw new ImoocMallException(ImoocMallExceptionEnum.WRONG_ORDER_STATUS);
+        }
+    }
+
+    @Override
+    public void finish(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        //查不到订单报错
+        if (order == null) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.NO_ORDER);
+        }
+
+        //如果是普通用户就要校验订单的所属
+        if (!userSerivce.checkAdminRole(UserFilter.currentUser) && !order.getUserId().equals(UserFilter.currentUser.getId())) {
+            throw new ImoocMallException(ImoocMallExceptionEnum.NOT_YOUR_ORDER);
+        }
+
+        //发货后可以完结订单
+        if (order.getOrderStatus() == Constant.OrderStatusEnum.DELIVERED.getCode()) {
+            order.setOrderStatus(Constant.OrderStatusEnum.FINISHED.getCode());
+            order.setEndTime(new Date());
             orderMapper.updateByPrimaryKeySelective(order);
         } else {
             throw new ImoocMallException(ImoocMallExceptionEnum.WRONG_ORDER_STATUS);
