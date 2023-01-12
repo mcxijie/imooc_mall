@@ -33,6 +33,6 @@ public class CartVO {
     private String productName;
 
     @ApiModelProperty(value = "产品图片,相对路径地址")
-    private String ProductImg;
+    private String productImg;
 
 }

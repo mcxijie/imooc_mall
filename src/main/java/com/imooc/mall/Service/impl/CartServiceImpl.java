@@ -123,7 +123,7 @@ public class CartServiceImpl implements CartService {
         if (product == null || product.getStatus().equals(Constant.SaleStatus.NOT_SALE)) {
             throw new ImoocMallException(ImoocMallExceptionEnum.NOT_SALE);
         }
-        //判断视频库存
+        //判断商品库存
         if (count > product.getStock()) {
             throw new ImoocMallException(ImoocMallExceptionEnum.NOT_ENOUGH);
         }
