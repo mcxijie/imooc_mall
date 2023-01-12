@@ -18,22 +18,29 @@
     create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from imooc_mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByOrderNO" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from imooc_mall_order_item
+    where order_no = #{orderNo}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from imooc_mall_order_item
+    delete
+    from imooc_mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.imooc.mall.model.pojo.OrderItem">
-    insert into imooc_mall_order_item (id, order_no, product_id, 
-      product_name, product_img, unit_price, 
-      quantity, total_price, create_time, 
-      update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
-      #{productName,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}, #{unitPrice,jdbcType=INTEGER}, 
+    insert into imooc_mall_order_item (id, order_no, product_id,
+                                       product_name, product_img, unit_price,
+                                       quantity, total_price, create_time,
+                                       update_time)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+            #{productName,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}, #{unitPrice,jdbcType=INTEGER},
       #{quantity,jdbcType=INTEGER}, #{totalPrice,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
