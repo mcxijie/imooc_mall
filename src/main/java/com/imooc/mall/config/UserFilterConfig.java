@@ -22,7 +22,7 @@ public class UserFilterConfig {
         filterRegistrationBean.setFilter(userFilter());
         filterRegistrationBean.addUrlPatterns("/cart/*");
         filterRegistrationBean.addUrlPatterns("/order/*");
-        filterRegistrationBean.setName("UserFilterConfig");
+        filterRegistrationBean.setName("userFilterConf");
         return filterRegistrationBean;
     }
 }

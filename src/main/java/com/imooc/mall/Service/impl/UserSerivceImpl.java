@@ -1,7 +1,7 @@
 package com.imooc.mall.Service.impl;
 
 
-import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.Service.UserService;
 import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
 import com.imooc.mall.model.dao.UserMapper;
@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  * 描述：   UserSerivce实现类
  */
 @Service
-public class UserSerivceImpl implements UserSerivce {
+public class UserSerivceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 

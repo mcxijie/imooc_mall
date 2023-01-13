@@ -91,21 +91,21 @@ public class ProductAdminController {
     }
 
     @ApiOperation("后台删除商品")
-    @PostMapping("admin/product/delete")
+    @PostMapping("/admin/product/delete")
     public ApiRestResponse deleteProduct(@RequestParam Integer id) {
         productService.delete(id);
         return ApiRestResponse.success();
     }
 
     @ApiOperation("后台批量上下架商品")
-    @PostMapping("admin/product/batchUpdateSellStatus")
+    @PostMapping("/admin/product/batchUpdateSellStatus")
     public ApiRestResponse batchUpdateSellStatus(@RequestParam Integer[] ids, @RequestParam Integer sellStatus) {
         productService.batchUpdateSellStatus(ids, sellStatus);
         return ApiRestResponse.success();
     }
 
     @ApiOperation("后台商品列表")
-    @GetMapping("admin/product/list")
+    @GetMapping("/admin/product/list")
     public ApiRestResponse<PageInfo> list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);

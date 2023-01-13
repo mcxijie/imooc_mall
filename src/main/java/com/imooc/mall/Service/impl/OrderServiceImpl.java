@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.zxing.WriterException;
 import com.imooc.mall.Service.CartService;
 import com.imooc.mall.Service.OrderService;
-import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.Service.UserService;
 import com.imooc.mall.common.Constant;
 import com.imooc.mall.exception.ImoocMallException;
 import com.imooc.mall.exception.ImoocMallExceptionEnum;
@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
     OrderItemMapper orderItemMapper;
 
     @Autowired
-    UserSerivce userSerivce;
+    UserService userSerivce;
 
     @Value("${file.upload.ip}")
     String ip;

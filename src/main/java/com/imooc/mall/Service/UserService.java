@@ -6,7 +6,7 @@ import com.imooc.mall.model.pojo.User;
 /**
  * 描述：   UserSerivce
  */
-public interface UserSerivce {
+public interface UserService {
     User getUser();
 
     void register(String userName, String password) throws ImoocMallException;

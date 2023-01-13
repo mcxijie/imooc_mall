@@ -2,7 +2,7 @@ package com.imooc.mall.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.imooc.mall.Service.CategoryService;
-import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.Service.UserService;
 import com.imooc.mall.common.ApiRestResponse;
 import com.imooc.mall.model.pojo.Category;
 import com.imooc.mall.model.request.AddCategoryReq;
@@ -26,7 +26,7 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    UserSerivce userSerivce;
+    UserService userSerivce;
 
     @Autowired
     CategoryService categoryService;

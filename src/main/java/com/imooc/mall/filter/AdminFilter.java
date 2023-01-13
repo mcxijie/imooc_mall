@@ -1,6 +1,6 @@
 package com.imooc.mall.filter;
 
-import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.Service.UserService;
 import com.imooc.mall.common.Constant;
 import com.imooc.mall.model.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,41 +19,43 @@ import java.io.PrintWriter;
 public class AdminFilter implements Filter {
 
     @Autowired
-    UserSerivce userSerivce;
+    UserService userService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                         FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
-
         User currentUser = (User) session.getAttribute(Constant.IMOOC_MALL_USER);
         if (currentUser == null) {
-            PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
-            out.write("{\n" +
-                    "  \"status\": 10007,\n" +
-                    "  \"msg\": \"NEED_LOGIN\",\n" +
-                    "  \"data\": null\n" +
-                    "}");
+            PrintWriter out = new HttpServletResponseWrapper(
+                    (HttpServletResponse) servletResponse).getWriter();
+            out.write("{\n"
+                    + "    \"status\": 10007,\n"
+                    + "    \"msg\": \"NEED_LOGIN\",\n"
+                    + "    \"data\": null\n"
+                    + "}");
             out.flush();
             out.close();
             return;
         }
-
         //校验是否是管理员
-        boolean adminRole = userSerivce.checkAdminRole(currentUser);
+        boolean adminRole = userService.checkAdminRole(currentUser);
         if (adminRole) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
-            out.write("{\n" +
-                    "  \"status\": 10009,\n" +
-                    "  \"msg\": \"NEED_ADMIN\",\n" +
-                    "  \"data\": null\n" +
-                    "}");
+            PrintWriter out = new HttpServletResponseWrapper(
+                    (HttpServletResponse) servletResponse).getWriter();
+            out.write("{\n"
+                    + "    \"status\": 10009,\n"
+                    + "    \"msg\": \"NEED_ADMIN\",\n"
+                    + "    \"data\": null\n"
+                    + "}");
             out.flush();
             out.close();
         }
@@ -61,5 +63,6 @@ public class AdminFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 }

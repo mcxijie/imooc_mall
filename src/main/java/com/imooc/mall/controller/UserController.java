@@ -1,6 +1,6 @@
 package com.imooc.mall.controller;
 
-import com.imooc.mall.Service.UserSerivce;
+import com.imooc.mall.Service.UserService;
 import com.imooc.mall.common.ApiRestResponse;
 import com.imooc.mall.common.Constant;
 import com.imooc.mall.exception.ImoocMallException;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @Autowired
-    UserSerivce userSerivce;
+    UserService userSerivce;
 
     @ApiOperation("test")
     @GetMapping("/test")
