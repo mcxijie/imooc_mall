@@ -3,7 +3,6 @@ package com.imooc.mall.config;
 import com.imooc.mall.common.Constant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,16 +21,16 @@ public class ImoocMallWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowCredentials(true)
-                .allowedOrigins("*")
-                .allowedHeaders("*")
-                .allowedMethods("*")
-                .maxAge(3600);
-
-        WebMvcConfigurer.super.addCorsMappings(registry);
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowCredentials(true)
+//                .allowedOrigins("*")
+//                .allowedHeaders("*")
+//                .allowedMethods("*")
+//                .maxAge(3600);
+//
+//        WebMvcConfigurer.super.addCorsMappings(registry);
+//    }
 
 }

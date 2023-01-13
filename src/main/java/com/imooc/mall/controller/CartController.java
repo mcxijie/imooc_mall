@@ -7,10 +7,7 @@ import com.imooc.mall.model.vo.CartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class CartController {
     CartService cartService;
 
     @ApiOperation("购物车列表")
-    @PostMapping("/list")
+    @GetMapping("/list")
     public ApiRestResponse<List<CartVO>> add() {
         //内部获取用户ID，防止横向越权
         List<CartVO> cartVOList = cartService.list(UserFilter.currentUser.getId());
